@@ -1,79 +1,84 @@
-// GET THE DATA
-
-
-function Month(name, id, nth, days) {
-
+function Country(name, short, population, flag, continent){
     this.name = name;
-    this.id = id;
-    this.nth = nth;
-    this.days = days;
-
-}
-
-
-const months = [
-    new Month("January", "jan", 1, 31),
-    new Month("February", "feb", 2, 28),
-    new Month("March", "mar", 3, 31),
-    new Month("April", "apr", 4, 30),
-    new Month("May", "may", 5, 31),
-    new Month("June", "jun", 6, 30),
-    new Month("July", "jul", 7, 31),
-    new Month("August", "aug", 8, 31),
-    new Month("September", "sep", 9, 30),
-    new Month("October", "oct", 10, 31),
-    new Month("November", "nov", 11, 30),
-    new Month("December", "dec", 12, 31),
-]
-console.log(months);
+    this.short = short;
+    this.population = population;
+    this.flag = flag;
+    this.continent = continent;
+};
 
 
-// PREPARE DATA
-
-// COMPONENTS = HTML elements we would like to add to the document later
-
-const monthSection = (id, h1, days) =>{ // Parameters have function scope
+const menuButton = _ => {
     return `
-    <section id="${id}">
-        <h1>${h1}</h1>
-        <div class="days">${days}</div>
-    </section>
+    <button id="menuButton>
+        <svg width="40" height="40">
+            <rect width="20" height="2"/>
+            <rect width="20" height="2"/>
+            <rect width="20" height="2"/>
+        </svg>
+    </button>
     `;
+};
+
+// COMPONENTS
+const header = (logo, button) => {
+    return `
+        <header>
+            <a id="logo">${logo}</a>
+            ${button()}
+        </header>    
+    `
 }
 
-const dayCard = (year, month, day) => {
-    return`
-    <div class="card">
-        <time>${year}</time>
-        <time>${month}</time>
-        <time>${day}</time>
-    </div>
+const countryCard = (country) => {
+    return `
+        <div id="cards">
+            <span>${country.name}</span>
+            <span>${country.short}</span>
+            <span>${country.population}</span>
+            <img src="${country.flag}"></img>
+            <span>${country.continent}</span>
+        </div>
     `;
+};
+
+const countryCards = (contentHTML) => {
+    return `
+    <section class="country-cards">${contentHTML}</sectio>
+    `
 }
 
-const dayCards = (month, callDayCard) =>{
-    let toReturn = "";
+
+const loadEvent = async _ => {
+
+    // GET DATA
+
+    const countryRes = await fetch("https://restcountries.com/v3.1/all");
+    const countryArr = await countryRes.json();
+
+    // console.log(countryArr[0]);
+
+    // PROCESS DATA
+
+    let countries = countryArr.map(function(country){
+        return new Country(country.name.common, country.cca3, country.population, country.flags.svg, country.continents[0])
+    });
+    // console.log(countries);
+
+    const rootElement = document.getElementById("root");
     
-    for (let i = 1; i <= month.days; i++){
-        toReturn += callDayCard(2022, months.nth, i )
+    rootElement.insertAdjacentHTML("beforeend",`${header("Countries", menuButton)}`);
+    
+    let countryHTML = "";
+    for (const country of countries) {
+        countryHTML += countryCard(country)
     }
+    rootElement.insertAdjacentHTML("beforeend", countryCards(countryHTML))
 
-    return toReturn
-}
-// console.log(dayCards(months[0], dayCard));
+    const menuButton = document.getElementById("menuButton");
+    menuButton.addEventListener("click", (event) =>{
+        event.target.classList.toggle("clicked")
+    })
 
-// RENDER = add the components to the document
+};
 
-const loadEvent = _ => {
-
-    let content = "";
-
-    for (const month of months) {
-
-        content+= monthSection(month.id, month.name, dayCards(month, dayCard))
-        
-    }
-    document.getElementById("root").insertAdjacentHTML("beforeend", content)
-
-}
-window.addEventListener("load", loadEvent) 
+window.addEventListener("load", loadEvent)
