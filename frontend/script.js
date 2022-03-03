@@ -1,4 +1,4 @@
-const loadEvent async = () => {
+const loadEvent = async () => {
     return `
     <form>
         <input id="input1" name="input1" type="text" />
@@ -40,7 +40,11 @@ form.addEventListener("submit", function(e) {
     console.log(e.target);
 })
 
-const apod = await fetch("https://api.nasa.gov/planetary/apod?api_key=xBU1reLNxxtLF1YzZ9bFVlHeZvdDAImrqqbgFRX5&date=2022-02-22")
+const apiKey = "xBU1reLNxxtLF1YzZ9bFVlHeZvdDAImrqqbgFRX5"
+
+const requestedDate = "2022-02-22"
+
+const apod = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&${requestedDate}`)
 
 console.log(apod);
 
