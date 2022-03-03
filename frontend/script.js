@@ -58,8 +58,6 @@ function loadEvent() {
         console.log(event.target);
     })
     
-    
-
     /* 
     for (const input of inputList) {
         input.addEventListener("input", function(event){
@@ -67,6 +65,8 @@ function loadEvent() {
         })
     }
     */
+
+    
 
 }
 window.addEventListener("load", loadEvent)
