@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+    background: transparent;
+    font-family: inherit;
+  }
+  a {
+    text-decoration: none;
+  }
+  a img {
+    border: none;
+  }
+  
+  button,
+  a {
+    cursor: pointer;
+    color: inherit;
+  }
+  
+  textarea {
+    resize: none;
+  }
+  
+  button,
+  textarea,
+  select {
+    appearance: none !important;
+    border-radius: 0;
+  }
+  
+  /* Reset ends */
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
+
+#root {
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgb(173, 197, 151);
+}
+
+#root form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 500px;
+  width: 400px;
+  box-shadow: 5px 5px 5px rgba(0,0,0, 0.1),
+  -5px -5px 5px rgba(0,0,0, 0.1);
+  background-color: rgba(240, 248, 255, 20%);
+  text-align: center;
+}
+
+#root form label {
+  position: relative;
+  top: 100px;
+  margin: 20px 0;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 18px;
+}
+
+#root form input {
+  position: relative;
+  top: 100px;
+  height: 30px;
+  width: 250px;
+  padding: 5px 10px;
+  /* border: 1px solid black; */
+  border-radius: 8px;
+  margin: 20px 0;
+  background-color: rgb(240, 232, 222);
+  box-shadow: 5px 5px 5px rgba(0,0,0, 0.1),
+  -5px -5px 5px rgba(0,0,0, 0.1);
+  font-family: 'Fredoka', sans-serif;
+}
+
+#root form button {
+  position: relative;
+  top: 120px;
+  height: 35px;
+  width: 80px;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px rgba(0,0,0, 0.1),
+  -5px -5px 5px rgba(0,0,0, 0.1);
+  background-color: rgb(119, 160, 102);
+  font-family: 'Fredoka', sans-serif;
+}
+
+select {
+  position: relative;
+  top: 100px;
+  right: 50px;
+}
