@@ -1,84 +1,41 @@
-function Country(name, short, population, flag, continent){
-    this.name = name;
-    this.short = short;
-    this.population = population;
-    this.flag = flag;
-    this.continent = continent;
-};
+function init(mathFunction) {
 
 
-const menuButton = _ => {
-    return `
-    <button id="menuButton>
-        <svg width="40" height="40">
-            <rect width="20" height="2"/>
-            <rect width="20" height="2"/>
-            <rect width="20" height="2"/>
-        </svg>
-    </button>
-    `;
-};
+    var a = 5;
+    var b = 6;
 
-// COMPONENTS
-const header = (logo, button) => {
-    return `
-        <header>
-            <a id="logo">${logo}</a>
-            ${button()}
-        </header>    
-    `
-}
+    //console.log(c)
 
-const countryCard = (country) => {
-    return `
-        <div id="cards">
-            <span>${country.name}</span>
-            <span>${country.short}</span>
-            <span>${country.population}</span>
-            <img src="${country.flag}"></img>
-            <span>${country.continent}</span>
-        </div>
-    `;
-};
+    if (a < b){
 
-const countryCards = (contentHTML) => {
-    return `
-    <section class="country-cards">${contentHTML}</sectio>
-    `
-}
+        let c = mathFunction(b, a)
 
+        /* (function () {
+            var c = b - a;
+            console.log(c)
+        })();   */
+        console.log(c)
+    } else {
 
-const loadEvent = async _ => {
+        let c = mathFunction(a, b)
+        /*(function () {
+            var c = a - b;
+            console.log(c)
+        })();    */ 
+        console.log(c)
+    };
 
-    // GET DATA
-
-    const countryRes = await fetch("https://restcountries.com/v3.1/all");
-    const countryArr = await countryRes.json();
-
-    // console.log(countryArr[0]);
-
-    // PROCESS DATA
-
-    let countries = countryArr.map(function(country){
-        return new Country(country.name.common, country.cca3, country.population, country.flags.svg, country.continents[0])
-    });
-    // console.log(countries);
-
-    const rootElement = document.getElementById("root");
     
-    rootElement.insertAdjacentHTML("beforeend",`${header("Countries", menuButton)}`);
-    
-    let countryHTML = "";
-    for (const country of countries) {
-        countryHTML += countryCard(country)
-    }
-    rootElement.insertAdjacentHTML("beforeend", countryCards(countryHTML))
-
-    const menuButton = document.getElementById("menuButton");
-    menuButton.addEventListener("click", (event) =>{
-        event.target.classList.toggle("clicked")
-    })
-
 };
 
-window.addEventListener("load", loadEvent)
+const initC = (firstNumber, secondNumber) => {
+    return firstNumber - secondNumber;
+};
+
+const initD = (firstNumber, secondNumber) => {
+    return firstNumber * secondNumber;
+};
+
+
+
+init(initD);
